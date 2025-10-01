@@ -17,33 +17,33 @@ import static org.junit.jupiter.api.Assertions.*;
 @Disabled
 @SpringBootTest
 public class UserserviceTest {
-    @Autowired
-    private userrepository userrepository;
-
-    @Autowired
-    private journalentryservice journalentryservice;
-    @Autowired
-    private Userservice userservice;
-
-    @BeforeEach
-    void setup(){
-
-    }
-
-    @ParameterizedTest
-    @ArgumentsSource(userargumentsprovider.class)
-    public void testfindbyusername(User username){
-
-assertTrue(userservice.savenewuser(username));
-    }
-
-    @ParameterizedTest
-    @CsvSource({
-            "1,1,2",
-            "3,4,7",
-            "2,10,12"
-    })
-    public void test(int a,int b,int expected){
-        assertEquals(expected,a+b,"failed for: "+expected);
-    }
+//    @Autowired
+//    private userrepository userrepository;
+//
+//    @Autowired
+//    private journalentryservice journalentryservice;
+//    @Autowired
+//    private Userservice userservice;
+//
+//    @BeforeEach
+//    void setup(){
+//
+//    }
+//
+//    @ParameterizedTest
+//    @ArgumentsSource(userargumentsprovider.class)
+//    public void testfindbyusername(User username){
+//
+//assertTrue(userservice.savenewuser(username));
+//    }
+//
+//    @ParameterizedTest
+//    @CsvSource({
+//            "1,1,2",
+//            "3,4,7",
+//            "2,10,12"
+//    })
+//    public void test(int a,int b,int expected){
+//        assertEquals(expected,a+b,"failed for: "+expected);
+//    }
 }
