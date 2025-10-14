@@ -10,11 +10,12 @@ import org.springframework.util.Assert;
 import org.springframework.context.ApplicationContext;
 
 import java.util.Arrays;
-@Disabled
+
 @SpringBootTest
 public class UserRepositoryImplTests {
     @Autowired
     private UserRepositoryImpl userRepository;
+    @Disabled
     @Test
     void testUsers(){
         Assertions.assertNotNull(userRepository.getUserForSA());
