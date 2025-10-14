@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 
 import java.util.stream.Stream;
-
+@Disabled
 public class UserArgumentsProvider implements ArgumentsProvider {
     @Disabled
     @Override
