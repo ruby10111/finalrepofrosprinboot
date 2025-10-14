@@ -37,6 +37,7 @@ public ResponseEntity<?> getAllJournalEntriesOfUser() {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
     @PostMapping
     public ResponseEntity<?> createentry(@RequestBody JournalEntry myentry) {
         try {
