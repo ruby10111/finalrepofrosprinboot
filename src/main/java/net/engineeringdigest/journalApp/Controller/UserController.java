@@ -1,6 +1,9 @@
 package net.engineeringdigest.journalApp.Controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.engineeringdigest.journalApp.API.response.weatherresponse;
+import net.engineeringdigest.journalApp.dto.UserLoginDTO;
 import net.engineeringdigest.journalApp.entity.User;
 import net.engineeringdigest.journalApp.repository.userrepository;
 import net.engineeringdigest.journalApp.service.Userservice;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name="User APIS",description = "User can login ,change existing, delete users.")
 public class UserController {
     @Autowired
     private Userservice userservice;
@@ -22,7 +26,8 @@ public class UserController {
     @Autowired
     private weatherservice weatherservice;
     @PutMapping
-    public ResponseEntity<?> updateuser(@RequestBody User user){
+    @Operation(description = "Update user")
+    public ResponseEntity<?> updateuser(@RequestBody UserLoginDTO user){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         User userindb = userservice.findByUsername(userName);
@@ -33,12 +38,14 @@ public class UserController {
     }
 
     @DeleteMapping
+    @Operation(description = "delete user")
     public ResponseEntity<?> deleteUserById(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         userrepository.deleteByUserName(authentication.getName());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping
+    @Operation(description = "Get Weather")
     public ResponseEntity<?> greetings(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         weatherresponse weather = weatherservice.getWeather("Mumbai");

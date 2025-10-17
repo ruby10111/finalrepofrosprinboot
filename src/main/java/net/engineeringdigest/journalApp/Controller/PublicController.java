@@ -1,6 +1,10 @@
 package net.engineeringdigest.journalApp.Controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
+import net.engineeringdigest.journalApp.dto.UserDTO;
+import net.engineeringdigest.journalApp.dto.UserLoginDTO;
 import net.engineeringdigest.journalApp.entity.User;
 import net.engineeringdigest.journalApp.service.UserDetailsServiceImpl;
 import net.engineeringdigest.journalApp.service.Userservice;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/public")
+@Tag(name="Public api",description = "Used to login,signup new users,and health check")
 public class PublicController {
 
     @Autowired
@@ -27,20 +32,28 @@ public class PublicController {
     @Autowired
     private Userservice userservice;
     @PostMapping("/signup")
-    public ResponseEntity<?> signup(@RequestBody User user){
-
-        boolean result=userservice.savenewuser(user);
+    @Operation(description = "SignUp")
+    public ResponseEntity<?> signup(@RequestBody UserDTO user){
+        User newuser=new User();
+        newuser.setEmail(user.getEmail());
+        newuser.setPassword(user.getPassword());
+        newuser.setUserName(user.getUserName());
+        newuser.setSentimentanalysis(user.isSentimentanalysis());
+        boolean result=userservice.savenewuser(newuser);
         if(result){
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.FORBIDDEN);
     }
     @GetMapping("/health-check")
+    @Operation(description = "health-check")
     public String healthcheck(){
         return "ok";
     }
+
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user){
+    @Operation(description = "Login")
+    public ResponseEntity<String> login(@RequestBody UserLoginDTO user){
         try{
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword()));
