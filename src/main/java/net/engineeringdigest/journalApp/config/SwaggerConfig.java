@@ -25,7 +25,7 @@ public OpenAPI myapiopen(){
                     new Server().url("http://localhost:8082").description("production")
             ))
             .tags(Arrays.asList(
-                    new Tag().name("Public api")
+                    new Tag().name("public")
                     ))
             .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
             .components(new Components().addSecuritySchemes(
