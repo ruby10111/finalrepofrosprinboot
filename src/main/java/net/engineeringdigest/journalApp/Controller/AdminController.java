@@ -15,7 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admin")
-@Tag(name="Admin APIS",description = "Admin create and get all users ")
 public class AdminController {
     @Autowired
     private Userservice userservice;

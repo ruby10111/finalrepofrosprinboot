@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
-@Tag(name="User APIS",description = "User can login ,change existing, delete users.")
 public class UserController {
     @Autowired
     private Userservice userservice;

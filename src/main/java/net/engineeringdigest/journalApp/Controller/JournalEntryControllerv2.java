@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/journal")
-@Tag(name="Journal APIS",description = "journal adding,deleting,viewing,changing")
 public class JournalEntryControllerv2 {
 
     @Autowired

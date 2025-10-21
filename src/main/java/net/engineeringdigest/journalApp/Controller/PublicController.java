@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RestController
 @RequestMapping("/public")
-@Tag(name="public",description = "Used to login,signup new users,and health check")
 public class PublicController {
 
     @Autowired

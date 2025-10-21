@@ -22,7 +22,10 @@ public OpenAPI myapiopen(){
                     .description("By Saurav")
     )
             .servers(Arrays.asList(new Server().url("http://localhost:8081").description("local"),
-                    new Server().url("http://localhost:8082").description("production")
+                    new Server().url("http://localhost:8082").description("production"),
+                    new Server()
+                            .url("https://finalrepofrosprinboot-1.onrender.com")
+                            .description("Production Server")
             ))
             .tags(Arrays.asList(
                     new Tag().name("public")
