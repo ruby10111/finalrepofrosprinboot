@@ -7,7 +7,7 @@ It demonstrates how to build, document, and deploy production-ready REST APIs us
 
 ## 🌐 Live API Documentation
 Access the live Swagger UI here:  
-🔗 [Deployed on Render](https://finalrepofrosprinboot-2.onrender.com/swagger-ui/index.html#/)
+🔗 [Deployed on Render](https://finalrepofrosprinboot-1.onrender.com/swagger-ui/index.html#/)
 
 ---
 
