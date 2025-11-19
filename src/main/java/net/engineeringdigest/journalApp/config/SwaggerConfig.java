@@ -23,9 +23,11 @@ public OpenAPI myapiopen(){
     )
             .servers(Arrays.asList(
                     new Server()
-                            .url("https://finalrepofrosprinboot-1.onrender.com")
-                            .description("Production Server")
-            ))
+                            .url("http://localhost:8081")
+                            .description("Development local Server")
+
+
+                    ))
             .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
             .components(new Components().addSecuritySchemes(
                     "bearerAuth", new SecurityScheme()
