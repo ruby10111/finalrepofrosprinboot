@@ -23,7 +23,7 @@ public OpenAPI myapiopen(){
     )
             .servers(Arrays.asList(
                     new Server()
-                            .url("http://localhost:8081")
+                            .url("https://finalrepofrosprinboot-1.onrender.com")
                             .description("Development local Server")
 
 
