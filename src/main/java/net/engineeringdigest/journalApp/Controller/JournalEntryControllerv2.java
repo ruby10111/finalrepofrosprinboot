@@ -1,7 +1,6 @@
 package net.engineeringdigest.journalApp.Controller;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import net.engineeringdigest.journalApp.dto.JournalDTO;
 import net.engineeringdigest.journalApp.entity.JournalEntry;
 import net.engineeringdigest.journalApp.entity.User;
@@ -15,7 +14,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -59,7 +60,29 @@ public ResponseEntity<?> getAllJournalEntriesOfUser() {
         }
 
 }
-@GetMapping("id/{myid}")
+
+
+
+    @GetMapping("/getid")
+    public ResponseEntity<List<Map<String, ? extends Serializable>>> getJournals() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userName = authentication.getName();
+        User user = userService.findByUsername(userName);
+
+        List<Map<String, ? extends Serializable>> formatted = user.getJournalEntries().stream().map(j -> Map.of(
+                "_id", j.getId().toString(),
+                "title", j.getTitle(),
+                "content", j.getContent(),
+                "date", j.getDate(),
+                "sentiment", j.getSentiment()
+        )).collect(Collectors.toList());
+
+        return ResponseEntity.ok(formatted);
+    }
+
+
+
+    @GetMapping("id/{myid}")
 @Operation(summary = "Get journal by id")
 public ResponseEntity<?> getjournalentrybyid(@PathVariable String myid){
         ObjectId objectId=new ObjectId(myid);
