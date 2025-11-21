@@ -15,9 +15,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -64,21 +62,27 @@ public ResponseEntity<?> getAllJournalEntriesOfUser() {
 
 
     @GetMapping("/getid")
-    public ResponseEntity<List<Map<String, ? extends Serializable>>> getJournals() {
+    public ResponseEntity<List<Map<String, Object>>> getJournals() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         User user = userService.findByUsername(userName);
 
-        List<Map<String, ? extends Serializable>> formatted = user.getJournalEntries().stream().map(j -> Map.of(
-                "_id", j.getId().toString(),
-                "title", j.getTitle(),
-                "content", j.getContent(),
-                "date", j.getDate(),
-                "sentiment", j.getSentiment()
-        )).collect(Collectors.toList());
+        List<Map<String, Object>> formatted = new ArrayList<>();
+        if (user != null && user.getJournalEntries() != null) {
+            for (JournalEntry j : user.getJournalEntries()) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("_id", j.getId().toString());
+                map.put("title", j.getTitle() != null ? j.getTitle() : "");
+                map.put("content", j.getContent() != null ? j.getContent() : "");
+                map.put("date", j.getDate() != null ? j.getDate().toString() : "");
+                map.put("sentiment", j.getSentiment() != null ? j.getSentiment() : "");
+                formatted.add(map);
+            }
+        }
 
         return ResponseEntity.ok(formatted);
     }
+
 
 
 
